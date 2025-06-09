@@ -1,150 +1,82 @@
-# Phase 1: Préparation et Initialisation
-##  Création des dépôts GitLab
-### Dépôt Infrastructure
-- Nom: code-keeper-infra
-- Contenu: Configuration Terraform pour staging/production
-- Structure:
-```
-code-keeper-infra/
-├── modules/          # Modules partagés (VPC, DB, Kubernetes, etc.)
-├── staging/          # Environnement staging
-├── production/       # Environnement production
-└── .gitlab-ci.yml    # Pipeline Terraform (init, validate, plan, apply)
-```
-### Dépôts Microservices
-- inventory-app → Code + Dockerfile + CI/CD
-- billing-app → Code + Dockerfile + CI/CD
-- api-gateway-app → Code + Dockerfile + CI/CD
-### Dépôt Ansible (Optionnel)
-- Nom: code-keeper-ansible
-- Contenu: Playbooks pour déployer GitLab et les runners
+# ✅ ÉTAPE 1 – CI/CD : Vérifie que les pipelines tournent sur GitLab
+- Objectif: que chaque projet exécute son .gitlab-ci.yml.
+  - Va sur GitLab > chaque dépôt > CI/CD > Pipelines
+  - Vérifie que le pipeline se lance après un push
+  - Résous les erreurs si besoin (je peux t’aider pour ça)
+- 👉 Si tout est vert ✅ : passe à l'étape suivante.
 
-## Configuration de GitLab
-### Déployer GitLab avec Ansible
-- Utiliser le playbook deploy-gitlab.yml pour installer :
-```
-- name: Install GitLab
-  hosts: gitlab_servers
-  tasks:
-    - name: Add GitLab repo
-      apt_repository:
-        repo: "deb https://packages.gitlab.com/gitlab/gitlab-ce/ubuntu focal main"
-        key_url: "https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey"
-```
-### Configurer les Runners
-- Installer GitLab Runner en mode docker ou kubernetes.
-- Enregistrer les runners avec:
-```
-sudo gitlab-runner register --url "https://gitlab.example.com" --token "PROJECT_TOKEN"
-```
+****************************************
+****************************************
 
-**************************************************************
-**************************************************************
-
-# Phase 2: Infrastructure as Code (Terraform)
-## Définir l'infrastructure cloud
-### Créer les modules Terraform
-- Exemple: modules/ec2 pour les instances, modules/rds pour les bases de données.
-### Configurer les environnements
-- Staging (staging/main.tf):
+# ✅ ÉTAPE 2 – Docker : Tester chaque microservice localement
+- Objectif: s'assurer que tes services sont bien conteneurisés.
+- Dans chaque dossier (api-gateway-app, billing-app, etc.):
 ```
-module "inventory_app" {
-  source = "../modules/ec2"
-  env    = "staging"
-}
+docker build -t mon-service .
+docker run -p 5000:5000 mon-service
 ```
-- Production (production/main.tf) :
+- Teste avec curl ou un navigateur.
+- Corrige si une app ne démarre pas.
+
+****************************************
+****************************************
+
+# ✅ ÉTAPE 3 – Vagrant (ou Ansible local) : déployer GitLab Auto-hébergé
+- Objectif: simuler un environnement de prod.
+- Dans gitlab-ansible-deploy/:
 ```
-module "inventory_app" {
-  source = "../modules/ec2"
-  env    = "production"
-}
+vagrant up
+vagrant ssh
+ansible-playbook -i hosts install_gitlab.yml
 ```
-### Pipeline Terraform (.gitlab-ci.yml)
+- 💡 Assure-toi que tu as bien ansible installé, ou utilise une VM Ubuntu.
+
+****************************************
+****************************************
+
+# ✅ ÉTAPE 4 – Terraform : Provisonner ton infra cloud simulée
+- Objectif: créer une infra (VMs, DB, réseau) avec Terraform.
+- Dans infrastructure-config/:
 ```
-stages:
-  - init
-  - validate
-  - plan
-  - deploy_staging
-  - approval
-  - deploy_prod
-
-terraform_init:
-  stage: init
-  script: terraform init
-
-terraform_validate:
-  stage: validate
-  script: terraform validate
+cd environments/staging
+terraform init
+terraform validate
+terraform plan
+terraform apply
 ```
+- Cela va créer:
+  - des ressources de staging (mock cloud ou localstack)
+  - que tu peux adapter à AWS ou OpenStack
 
-**************************************************************
-**************************************************************
+****************************************
+****************************************
 
+# ✅ ÉTAPE 5 – Déploiement automatique
+- Tu dois relier:
+  - les pipelines CI (build des images Docker)
+  - au déploiement automatique (via Ansible/Terraform)
+- À faire:
+  - Soit dans les jobs deploy de chaque .gitlab-ci.yml
+  - Soit via un dépôt central (gitlab-ansible-deploy) qui fait le ansible-playbook ou terraform apply automatiquement
 
-# Phase 3: CI/CD pour les Microservices
-## Pipeline CI (Build, Test, Scan)
-- Exemple pour inventory-app (.gitlab-ci.yml):
-```
-yaml
-stages:
-  - build
-  - test
-  - scan
-  - dockerize
+****************************************
+****************************************
 
-build:
-  stage: build
-  script: python -m pip install -r requirements.txt
+# ✅ ÉTAPE 6 – Documentation
+- Prépare un fichier README.md global (ou Questions-Réponses.md) avec:
+  - architecture (schéma)
+  - explication des dossiers
+  - comment tester
+  - comment déployer
+  - outils utilisés
 
-test:
-  stage: test
-  script: pytest tests/
+****************************************
+****************************************
 
-sonarqube_scan:
-  stage: scan
-  image: sonarsource/sonar-scanner-cli
-  script: sonar-scanner -Dsonar.login=$SONAR_TOKEN
-```
-## Pipeline CD (Déploiement Staging → Production)
-### Déploiement Staging
-```
-deploy_staging:
-  stage: deploy
-  environment: staging
-  script: kubectl apply -f k8s/staging.yaml
-  only: main
-```
-### Approbation manuelle
-```
-deploy_prod:
-  stage: deploy
-  environment: production
-  script: kubectl apply -f k8s/production.yaml
-  when: manual
-```
-
-**************************************************************
-**************************************************************
-
-
-# Phase 4: Sécurité et Optimisation
-## Bonnes Pratiques Sécurité
-- Secrets Management: Utiliser GitLab Variables ou HashiCorp Vault.
-- Least Privilege: Restreindre les permissions IAM dans Terraform.
-- Scan des Containers: Intégrer Trivy ou Clair dans le pipeline.
-
-## Documentation
-- README.md doit inclure:
-    - Prérequis (Terraform, Ansible, Docker)
-    - Étapes de déploiement
-    - Schéma d’architecture
-
-# Résumé des Étapes Clés
-1. Créer les dépôts GitLab (infra + 3 microservices).
-2. Déployer GitLab et les runners avec Ansible.
-3. Coder l’infrastructure avec Terraform (staging/prod).
-4. Configurer les pipelines CI/CD pour chaque microservice.
-5. Ajouter la sécurité (scan, secrets, IAM).
-6. Documenter et tester.
+# 🔚 Tu auras terminé ton projet quand :
+- Chaque microservice fonctionne dans un conteneur Docker
+- Chaque dépôt exécute son pipeline GitLab CI/CD
+- GitLab auto-hébergé (ou distant) fonctionne via Ansible
+- L’infrastructure est provisionnée via Terraform
+- Le déploiement est automatisé
+- Tu as une bonne documentation
