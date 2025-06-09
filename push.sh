@@ -3,6 +3,6 @@ git config --global user.name "mouhameddiouf"
 git config credential.helper store
 git add .
 git commit -m "
-Ce que veut le projet code-keeper
+Structure du projet
 "
 git push --force
