@@ -117,3 +117,93 @@ code-keeper/
 - Une meilleure maintenabilité
 - Une indépendance des microservices
 - Une gestion distincte de l'infrastructure
+
+## Créer le réseau commun pour les conteneurs:
+- docker network create microservice-net
+
+## Lancer les bases de données PostgreSQL
+- Inventory Database (port 5433 externe pour éviter conflit local)
+```
+docker run -d \
+  --name inventory-db \
+  --network microservice-net \
+  -e POSTGRES_USER=inventory_user \
+  -e POSTGRES_PASSWORD=inventory_pass \
+  -e POSTGRES_DB=inventory_db \
+  -p 5433:5432 \
+  postgres:13
+```
+
+- Billing Database (port 5434 externe)
+```
+docker run -d \
+  --name billing-db \
+  --network microservice-net \
+  -e POSTGRES_USER=billing_user \
+  -e POSTGRES_PASSWORD=billing_pass \
+  -e POSTGRES_DB=billing_db \
+  -p 5434:5432 \
+  postgres:13
+```
+
+## Lancer RabbitMQ (interface admin accessible en local sur 15672)
+```
+docker run -d \
+  --name rabbitmq \
+  --network microservice-net \
+  -e RABBITMQ_DEFAULT_USER=user \
+  -e RABBITMQ_DEFAULT_PASS=pass \
+  -p 5672:5672 \
+  -p 15672:15672 \
+  rabbitmq:3-management
+```
+
+## Construire les images
+```
+docker build -t inventory-app ./inventory-app
+docker build -t billing-app ./billing-app
+docker build -t api-gateway-app ./api-gateway-app
+```
+
+## Lancer les applications
+- Inventory App
+```
+docker run -d \
+  --name inventory-app \
+  --network microservice-net \
+  -e DB_HOST=inventory-db \
+  -e DB_PORT=5432 \
+  -e DB_USER=inventory_user \
+  -e DB_PASSWORD=inventory_pass \
+  -e DB_NAME=inventory_db \
+  -p 8081:8080 \
+  inventory-app
+```
+
+- Billing App
+```
+docker run -d \
+  --name billing-app \
+  --network microservice-net \
+  -e DB_HOST=billing-db \
+  -e DB_PORT=5432 \
+  -e DB_USER=billing_user \
+  -e DB_PASSWORD=billing_pass \
+  -e DB_NAME=billing_db \
+  -e RABBITMQ_HOST=rabbitmq \
+  -e RABBITMQ_USER=user \
+  -e RABBITMQ_PASS=pass \
+  -p 8082:8080 \
+  billing-app
+```
+
+- API Gateway App
+```
+docker run -d \
+  --name api-gateway-app \
+  --network microservice-net \
+  -e INVENTORY_URL=http://inventory-app:8080 \
+  -e BILLING_URL=http://billing-app:8080 \
+  -p 3000:3000 \
+  api-gateway-app
+```

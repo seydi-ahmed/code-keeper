@@ -73,10 +73,20 @@ terraform apply
 ****************************************
 ****************************************
 
-# 🔚 Tu auras terminé ton projet quand :
+# 🔚 Tu auras terminé ton projet quand:
 - Chaque microservice fonctionne dans un conteneur Docker
 - Chaque dépôt exécute son pipeline GitLab CI/CD
 - GitLab auto-hébergé (ou distant) fonctionne via Ansible
 - L’infrastructure est provisionnée via Terraform
 - Le déploiement est automatisé
 - Tu as une bonne documentation
+
+****************************************
+****************************************
+
+# Préparer une démo ou README self-contained avec:
+- 🎯 Objectif du projet
+- 🧱 Architecture (avec lien ou image)
+- ⚙️ Commandes pour lancer/tester
+- 📦 Outils utilisés (Docker, GitLab, Ansible, Terraform, etc.)
+- 🧪 Comment tester que tout fonctionne
