@@ -3,6 +3,6 @@ git config --global user.name "mouhameddiouf"
 git config credential.helper store
 git add .
 git commit -m "
-ansible-lint: disable=risky-shell-pipe
+fix: correct GitLab CE apt repository URL
 "
 git push --force
