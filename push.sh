@@ -3,6 +3,6 @@ git config --global user.name "mouhameddiouf"
 git config credential.helper store
 git add .
 git commit -m "
-gitlab-ansible-deploy
+Inclure set -o pipefail à l'intérieur de la commande bash
 "
 git push --force
