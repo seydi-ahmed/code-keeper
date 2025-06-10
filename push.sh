@@ -3,6 +3,6 @@ git config --global user.name "mouhameddiouf"
 git config credential.helper store
 git add .
 git commit -m "
-fix: correct GitLab CE apt repository URL
+commenter //Démarrer gitlab//
 "
 git push --force
