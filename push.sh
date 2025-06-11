@@ -3,6 +3,6 @@ git config --global user.name "mouhameddiouf"
 git config credential.helper store
 git add .
 git commit -m "
-Ansible local avec Vagrantfile
+✅ ÉTAPE 3 – Vagrant: déployer GitLab Auto-hébergé
 "
 git push --force
