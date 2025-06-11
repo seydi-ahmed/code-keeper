@@ -3,6 +3,6 @@ git config --global user.name "mouhameddiouf"
 git config credential.helper store
 git add .
 git commit -m "
-Docker : Tester chaque microservice localement --> done
+Ansible local avec Vagrantfile
 "
 git push --force

@@ -21,7 +21,7 @@ docker run -p 5000:5000 mon-service
 ****************************************
 ****************************************
 
-# ✅ ÉTAPE 3 – Vagrant (ou Ansible local) : déployer GitLab Auto-hébergé
+# ✅ ÉTAPE 3 – Vagrant (ou Ansible local): déployer GitLab Auto-hébergé
 - Objectif: simuler un environnement de prod.
 - Dans gitlab-ansible-deploy/:
 ```
