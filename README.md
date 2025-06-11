@@ -122,10 +122,15 @@ code-keeper/
 - vagrant up
 - vagrant ssh
 ```
-sudo apt remove ansible -y
+sudo apt update
 sudo apt install python3-pip -y
 pip3 install ansible --upgrade
 ```
 - export PATH=$HOME/.local/bin:$PATH
 - ansible --version
 - ansible-playbook -i /vagrant/hosts /vagrant/install_gitlab.yml
+- reconfigurer GitLab
+  - sudo gitlab-ctl reconfigure
+- Vérifie l'état de GitLab:
+  - sudo gitlab-ctl status
+
