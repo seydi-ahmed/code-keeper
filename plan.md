@@ -1,4 +1,4 @@
-# ✅ ÉTAPE 1 – CI/CD : Vérifie que les pipelines tournent sur GitLab
+# ✅ ÉTAPE 1 – CI/CD: Vérifie que les pipelines tournent sur GitLab
 - Objectif: que chaque projet exécute son .gitlab-ci.yml.
   - Va sur GitLab > chaque dépôt > CI/CD > Pipelines
   - Vérifie que le pipeline se lance après un push
@@ -8,7 +8,7 @@
 ****************************************
 ****************************************
 
-# ✅ ÉTAPE 2 – Docker : Tester chaque microservice localement
+# ✅ ÉTAPE 2 – Docker: Tester chaque microservice localement
 - Objectif: s'assurer que tes services sont bien conteneurisés.
 - Dans chaque dossier (api-gateway-app, billing-app, etc.):
 ```
@@ -34,7 +34,7 @@ ansible-playbook -i hosts install_gitlab.yml
 ****************************************
 ****************************************
 
-# ✅ ÉTAPE 4 – Terraform : Provisonner ton infra cloud simulée
+# ✅ ÉTAPE 4 – Terraform: Provisonner ton infra cloud simulée
 - Objectif: créer une infra (VMs, DB, réseau) avec Terraform.
 - Dans infrastructure-config/:
 ```
