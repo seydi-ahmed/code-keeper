@@ -3,6 +3,6 @@ git config --global user.name "mouhameddiouf"
 git config credential.helper store
 git add .
 git commit -m "
-environments/production/
+le .gitlab-ci.yml pose probléme
 "
 git push --force

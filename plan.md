@@ -133,3 +133,9 @@ cat modules/vpc/main.tf
 cat modules/vpc/outputs.tf
 cat modules/vpc/variables.tf
 ```
+
+```
+git add .
+git commit -m "finish"
+git push
+```
