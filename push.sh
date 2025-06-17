@@ -3,6 +3,6 @@ git config --global user.name "mouhameddiouf"
 git config credential.helper store
 git add .
 git commit -m "
-terraform plan -var-file="staging.tfvars"
+infrastructure entièrement fonctionnelle
 "
 git push --force

@@ -122,3 +122,14 @@ terraform apply
 
 - Access Key ID:            AKIAQZFG5DO6Q6DTAQVK
 - Clé d'accès secrète:      sMGLA8/c/y4FdG3duTz3YwZFNsMAMKhKQSv5oWWu
+```
+cat modules/app/main.tf
+cat modules/app/variables.tf
+cat modules/app/outputs.tf
+cat modules/db/main.tf
+cat modules/db/outputs.tf
+cat modules/db/variables.tf
+cat modules/vpc/main.tf
+cat modules/vpc/outputs.tf
+cat modules/vpc/variables.tf
+```
