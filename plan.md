@@ -105,8 +105,8 @@ terraform apply
 | ✅ 5   | `modules/app/`             | Création cluster EKS ou instance app    |
 | ✅ 6   | `main.tf` global           | Appel des modules                       |
 | ✅ 7   | `outputs.tf` global        | Sorties globales                        |
-| ⏳ 8   | `environments/staging/`    | Appels + tfvars                         |
-| ⏳ 9   | `environments/production/` | Appels + tfvars                         |
+| ✅ 8   | `environments/staging/`    | Appels + tfvars                         |
+| ✅ 9   | `environments/production/` | Appels + tfvars                         |
 
 ****************************************
 ****************************************
