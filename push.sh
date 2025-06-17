@@ -3,7 +3,9 @@ git config --global user.name "mouhameddiouf"
 git config credential.helper store
 git add .
 git commit -m "
-Notes pour Aws Cloud Practitioner:
-Renommer:
+structure infrastructure-config:
+- propre,
+- modulaire
+- orientée CI/CD
 "
 git push --force

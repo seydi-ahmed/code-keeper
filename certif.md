@@ -24,3 +24,14 @@
 - index document:
     --> ancien nom
     --> nouveau nom
+
+## Second part:
+- S3 --> cloud-first-steps-xxxx --> userdata.txt --> open --> VÉRIFIER
+                                                 --> Download --> Return S3 --> EC2 --> launch instance --> Quick Start (Amazon linux AWS)
+                                                 --> instance type (compare instance type) --> t3.micro --> Get advice
+                                                 --> key pair (key pair name) --> Proceded with a key pair
+                                                 --> vpc (cloud-first-step/LabVpc)
+                                                 --> subnet (cloud-first-step/LabVpc)
+                                                 --> security group name (Lab-SG) --> Description (HTTP Security Group) --> Type (HTTP)
+                                                 --> configure storage (gp3) --> advanced details (choose file) --> launch instance --> view all instances
+                                                 --> actualiser --> webserver01 (running) --> public ipv4 dns
