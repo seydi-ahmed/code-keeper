@@ -107,3 +107,18 @@ terraform apply
 | ✅ 7   | `outputs.tf` global        | Sorties globales                        |
 | ⏳ 8   | `environments/staging/`    | Appels + tfvars                         |
 | ⏳ 9   | `environments/production/` | Appels + tfvars                         |
+
+****************************************
+****************************************
+
+# Backend
+
+| Ressource        | Valeur                |
+| ---------------- | --------------------- |
+| 🪣 S3 Bucket     | `my-terraform-states` |
+| 📋 DynamoDB Lock | `terraform-locks`     |
+| 🌍 Région AWS    | `eu-west-3` (Paris) |
+
+
+- Access Key ID:            AKIAQZFG5DO6Q6DTAQVK
+- Clé d'accès secrète:      sMGLA8/c/y4FdG3duTz3YwZFNsMAMKhKQSv5oWWu
