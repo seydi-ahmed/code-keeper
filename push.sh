@@ -3,6 +3,6 @@ git config --global user.name "mouhameddiouf"
 git config credential.helper store
 git add .
 git commit -m "
-main global
+outputs global
 "
 git push --force

@@ -103,7 +103,7 @@ terraform apply
 | ✅ 3   | `modules/vpc/`             | Création VPC, subnets, IGW              |
 | ✅ 4   | `modules/db/`              | Création base de données (RDS ou autre) |
 | ✅ 5   | `modules/app/`             | Création cluster EKS ou instance app    |
-| ⏳ 6   | `main.tf` global           | Appel des modules                       |
-| ⏳ 7   | `outputs.tf` global        | Sorties globales                        |
+| ✅ 6   | `main.tf` global           | Appel des modules                       |
+| ✅ 7   | `outputs.tf` global        | Sorties globales                        |
 | ⏳ 8   | `environments/staging/`    | Appels + tfvars                         |
 | ⏳ 9   | `environments/production/` | Appels + tfvars                         |
