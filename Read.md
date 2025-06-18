@@ -103,3 +103,38 @@ curl http://localhost:5000/health
 ```
 docker-compose up --build
 ```
+
+---
+
+## Gestion CI/CD avec GitLab
+
+- Chaque microservice possède un fichier .gitlab-ci.yml qui définit les étapes: build, test, dockerize.
+- Un pipeline est déclenché à chaque push sur les branches protégées (main, master, staging).
+- Les images Docker sont automatiquement construites et poussées dans le registre GitLab.
+- Le déploiement est automatisé sur les environnements Staging et Production via Terraform et Ansible.
+
+---
+
+## Déploiement de GitLab auto-hébergé avec Vagrant et Ansible
+
+1. Positionne-toi dans gitlab-ansible-deploy/:
+- cd gitlab-ansible-deploy
+- vagrant up
+- vagrant ssh
+- sudo apt update
+- sudo apt install python3-pip -y
+- pip3 install ansible --upgrade
+- export PATH=$HOME/.local/bin:$PATH
+- ansible --version
+- ansible-playbook -i /vagrant/hosts /vagrant/install_gitlab.yml
+- sudo gitlab-ctl reconfigure
+- sudo gitlab-ctl status
+
+
+2. Le playbook installe et configure GitLab et ses runners sur la VM.
+
+3. Vérifie le statut avec:
+```
+systemctl status gitlab-runsvdir.service
+ansible-playbook --list-tasks install_gitlab.yml
+```

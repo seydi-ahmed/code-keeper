@@ -3,6 +3,6 @@ git config --global user.name "mouhameddiouf"
 git config credential.helper store
 git add .
 git commit -m "
-Installation et test local des microservices
+Déploiement de GitLab auto-hébergé avec Vagrant et Ansible
 "
 git push --force
