@@ -206,5 +206,4 @@ terraform apply -var-file=staging.tfvars
 | Nom | Email | GitHub |
 |-----|-------|--------|
 | **Mouhamed Diouf** | [seydiahmedelcheikh@gmail.com](mailto:seydiahmedelcheikh@gmail.com) | [mouhameddiouf](https://learn.zone01dakar.sn/git/mouhameddiouf) |
-| **Abdou Balde** | [abddou.balde@sn.01talent.com](mailto:abddou.balde@sn.01talent.com) | [abdbalde](https://learn.zone01dakar.sn/git/abdbalde) |
 
