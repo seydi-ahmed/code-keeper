@@ -1,26 +1,26 @@
-# Projet DevOps - Code Keeper
+# 🚀 Projet DevOps - Code Keeper
 
 ---
 
 ## 📖 Sommaire
 
-- [Présentation du projet](#présentation-du-projet)
-- [Architecture générale](#architecture-générale)
-- [Organisation des dossiers](#organisation-des-dossiers)
-- [Prérequis](#prérequis)
-- [Installation et test local des microservices](#installation-et-test-local-des-microservices)
-- [Gestion CI/CD avec GitLab](#gestion-cicd-avec-gitlab)
-- [Déploiement de GitLab auto-hébergé avec Vagrant et Ansible](#déploiement-de-gitlab-auto-hébergé-avec-vagrant-et-ansible)
-- [Provisionnement Infrastructure avec Terraform](#provisionnement-infrastructure-avec-terraform)
-- [Déploiement automatique via pipelines](#déploiement-automatique-via-pipelines)
-- [Sécurité et bonnes pratiques](#sécurité-et-bonnes-pratiques)
-- [Outils utilisés](#outils-utilisés)
-- [FAQ](#faq)
-- [Contact](#contact)
+- [🌟 Présentation du projet](#présentation-du-projet)
+- [🏗 Architecture générale](#architecture-générale)
+- [🗂 Organisation des dossiers](#organisation-des-dossiers)
+- [⚙️ Prérequis](#prérequis)
+- [💻 Installation et test local des microservices](#installation-et-test-local-des-microservices)
+- [🔁 Gestion CI/CD avec GitLab](#gestion-cicd-avec-gitlab)
+- [🛠 Déploiement de GitLab auto-hébergé avec Vagrant et Ansible](#déploiement-de-gitlab-auto-hébergé-avec-vagrant-et-ansible)
+- [☁️ Provisionnement Infrastructure avec Terraform](#provisionnement-infrastructure-avec-terraform)
+- [⚡  Déploiement automatique via pipelines](#déploiement-automatique-via-pipelines)
+- [🔒 Sécurité et bonnes pratiques](#sécurité-et-bonnes-pratiques)
+- [🛠 Outils utilisés](#outils-utilisés)
+- [❓ FAQ](#faq)
+- [📞 Contact](#contact)
 
 ---
 
-## Présentation du projet
+## 🌟 Présentation du projet
 
 Ce projet a pour objectif la mise en place complète d’une chaîne DevOps pour une application composée de plusieurs microservices.  
 Il inclut :
@@ -33,7 +33,7 @@ Il inclut :
 
 ---
 
-## Architecture générale
+## 🏗 Architecture générale
 
 ```mermaid
 graph TD
@@ -52,7 +52,7 @@ graph TD
 
 ---
 
-## Organisation des dossiers
+## 🗂 Organisation des dossiers
 
 | Dossier                  | Description                            |
 | ------------------------ | -------------------------------------- |
@@ -67,7 +67,7 @@ graph TD
 
 ---
 
-## Prérequis
+## ⚙️ Prérequis
 
 - Docker (>= 20.x)
 - Docker Compose (optionnel pour tests locaux)
@@ -79,7 +79,7 @@ graph TD
 
 ---
 
-## Installation et test local des microservices
+## 💻 Installation et test local des microservices
 
 1. Clone le projet:
 ```
@@ -106,7 +106,7 @@ docker-compose up --build
 
 ---
 
-## Gestion CI/CD avec GitLab
+## 🔁 Gestion CI/CD avec GitLab
 
 - Chaque microservice possède un fichier .gitlab-ci.yml qui définit les étapes: build, test, dockerize.
 - Un pipeline est déclenché à chaque push sur les branches protégées (main, master, staging).
@@ -115,7 +115,7 @@ docker-compose up --build
 
 ---
 
-## Déploiement de GitLab auto-hébergé avec Vagrant et Ansible
+## 🛠 Déploiement de GitLab auto-hébergé avec Vagrant et Ansible
 
 1. Positionne-toi dans gitlab-ansible-deploy/:
 - cd gitlab-ansible-deploy
@@ -136,7 +136,7 @@ docker-compose up --build
 
 ---
 
-## Provisionnement Infrastructure avec Terraform
+## ☁️ Provisionnement Infrastructure avec Terraform
 
 1. Pour créer l’environnement staging:
 ```
@@ -151,18 +151,59 @@ terraform apply -var-file=staging.tfvars
 
 ---
 
-## Déploiement automatique via pipelines
+## ⚡ Déploiement automatique via pipelines
 - Le pipeline .gitlab-ci.yml déclenche automatiquement ansible-playbook ou terraform apply dans les jobs de déploiement.
 - Un dépôt central gitlab-ansible-deploy orchestre les déploiements via CI.
 - Approvals manuelles sont intégrées pour la promotion vers la production.
 
 ---
 
-## Sécurité et bonnes pratiques
+## 🔒 Sécurité et bonnes pratiques
 
 - Branches protégées empêchent le déploiement par des utilisateurs non autorisés.
 - Variables sensibles gérées via GitLab CI/CD variables ou .env, jamais en dur dans le code.
 - Principe du moindre privilège appliqué pour les accès ansible, cloud et GitLab.
 - Mises à jour régulières des dépendances et images Docker.
 - Audit des pipelines pour éviter exécutions non souhaitées.
+
+---
+
+## 🛠 Outils utilisés
+
+| Outil      | Rôle                              |
+| ---------- | --------------------------------- |
+| GitLab CI  | Gestion des pipelines CI/CD       |
+| Docker     | Conteneurisation des services     |
+| Vagrant    | Virtualisation pour tests locaux  |
+| Ansible    | Automatisation déploiement GitLab |
+| Terraform  | Provisionnement Infrastructure    |
+| PostgreSQL | Base de données                   |
+| RabbitMQ   | Messagerie                        |
+
+
+---
+
+## ❓ FAQ
+
+- Q: Comment puis-je modifier les pipelines ?
+- R: Chaque microservice possède son propre .gitlab-ci.yml modifiable selon les besoins.
+
+***********
+
+- Q: Comment gérer les secrets ?
+- R: Utilise les variables GitLab CI/CD ou un vault dédié.
+
+***********
+
+- Q: Comment tester les déploiements localement ?
+- R: Utilise docker-compose pour lancer tous les services en local.
+
+---
+
+## 📞 Contact
+
+| Nom | Email | GitHub |
+|-----|-------|--------|
+| **Mouhamed Diouf** | [seydiahmedelcheikh@gmail.com](mailto:seydiahmedelcheikh@gmail.com) | [mouhameddiouf](https://learn.zone01dakar.sn/git/mouhameddiouf) |
+| **Abdou Balde** | [abddou.balde@sn.01talent.com](mailto:abddou.balde@sn.01talent.com) | [abdbalde](https://learn.zone01dakar.sn/git/abdbalde) |
 
