@@ -3,6 +3,7 @@ git config --global user.name "mouhameddiouf"
 git config credential.helper store
 git add .
 git commit -m "
-plan && apply restants
+plan  --> ok
+apply --> restant
 "
 git push --force
