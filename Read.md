@@ -156,3 +156,13 @@ terraform apply -var-file=staging.tfvars
 - Un dépôt central gitlab-ansible-deploy orchestre les déploiements via CI.
 - Approvals manuelles sont intégrées pour la promotion vers la production.
 
+---
+
+## Sécurité et bonnes pratiques
+
+- Branches protégées empêchent le déploiement par des utilisateurs non autorisés.
+- Variables sensibles gérées via GitLab CI/CD variables ou .env, jamais en dur dans le code.
+- Principe du moindre privilège appliqué pour les accès ansible, cloud et GitLab.
+- Mises à jour régulières des dépendances et images Docker.
+- Audit des pipelines pour éviter exécutions non souhaitées.
+
