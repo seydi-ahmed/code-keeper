@@ -128,13 +128,23 @@ docker-compose up --build
 - ansible --version
 - ansible-playbook -i /vagrant/hosts /vagrant/install_gitlab.yml
 - sudo gitlab-ctl reconfigure
-- sudo gitlab-ctl status
-
 
 2. Le playbook installe et configure GitLab et ses runners sur la VM.
 
 3. Vérifie le statut avec:
+- sudo gitlab-ctl status
+
+---
+
+## Provisionnement Infrastructure avec Terraform
+
+1. Pour créer l’environnement staging:
 ```
-systemctl status gitlab-runsvdir.service
-ansible-playbook --list-tasks install_gitlab.yml
+cd infrastructure-config/environments/staging
+terraform init
+terraform validate
+terraform plan -var-file=staging.tfvars
+terraform apply -var-file=staging.tfvars
 ```
+2. Même procédure pour production en changeant de dossier et fichier .tfvars.
+3. La configuration prévoit réseau, bases de données, VMs, et services.
