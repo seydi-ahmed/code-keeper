@@ -148,3 +148,11 @@ terraform apply -var-file=staging.tfvars
 ```
 2. Même procédure pour production en changeant de dossier et fichier .tfvars.
 3. La configuration prévoit réseau, bases de données, VMs, et services.
+
+---
+
+## Déploiement automatique via pipelines
+- Le pipeline .gitlab-ci.yml déclenche automatiquement ansible-playbook ou terraform apply dans les jobs de déploiement.
+- Un dépôt central gitlab-ansible-deploy orchestre les déploiements via CI.
+- Approvals manuelles sont intégrées pour la promotion vers la production.
+
