@@ -134,3 +134,8 @@ pip3 install ansible --upgrade
 - Vérifie l'état de GitLab:
   - sudo gitlab-ctl status
 
+
+
+
+**********************************
+**********************************
