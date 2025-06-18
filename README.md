@@ -94,9 +94,9 @@ docker build -t api-gateway .
 docker run -p 5000:5000 api-gateway
 ```
 
-3. Tester l’accès via curl ou navigateur:
+3. Tester l’accès via curl ou navigateur (ou directement sur postman):
 ```
-curl http://localhost:5000/health
+curl http://localhost:3000/api/movies
 ```
 
 4. Pour un déploiement local multi-services, utilise:
