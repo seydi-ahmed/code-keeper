@@ -76,3 +76,30 @@ graph TD
 - Terraform (>= 1.0)
 - GitLab (auto-hébergé ou SaaS)
 - Accès à un registre Docker (GitLab Registry, Docker Hub…)
+
+---
+
+## Installation et test local des microservices
+
+1. Clone le projet:
+```
+git clone https://github.com/seydi-ahmed/code-keeper.git
+cd code-keeper
+```
+
+2. Pour chaque microservice (exemple api-gateway-app):
+```
+cd api-gateway-app
+docker build -t api-gateway .
+docker run -p 5000:5000 api-gateway
+```
+
+3. Tester l’accès via curl ou navigateur:
+```
+curl http://localhost:5000/health
+```
+
+4. Pour un déploiement local multi-services, utilise:
+```
+docker-compose up --build
+```
