@@ -1,5 +1,7 @@
 # 🚀 Projet DevOps - Code Keeper
 
+Code Keeper est une plateforme modulaire et conteneurisée composée de plusieurs microservices, destinée à gérer un flux complet de gestion de produits, de stock et de facturation dans une infrastructure DevOps automatisée. Elle est conçue pour démontrer une architecture CI/CD complète avec GitLab, Docker, Ansible et Terraform.
+
 ---
 
 ## 📖 Sommaire
@@ -121,8 +123,7 @@ docker-compose up --build
 - cd gitlab-ansible-deploy
 - vagrant up
 - vagrant ssh
-- sudo apt update
-- sudo apt install python3-pip -y
+- sudo apt update && sudo apt install python3-pip -y
 - pip3 install ansible --upgrade
 - export PATH=$HOME/.local/bin:$PATH
 - ansible --version
